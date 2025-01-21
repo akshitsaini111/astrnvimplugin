@@ -13,6 +13,7 @@ return {
     "ThePrimeagen/harpoon",
     config = function()
       -- Keybindings for Harpoon
+      vim.api.nvim_set_keymap('n', '<leader>hr', ':lua require("harpoon.mark").rm_file()<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>ha', ':lua require("harpoon.mark").add_file()<CR>', { noremap = true, silent = true })  -- Add current file
       vim.api.nvim_set_keymap('n', '<leader>hf', ':lua require("harpoon.ui").toggle_quick_menu()<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>hc', ':lua require("harpoon.mark").clear_all()<CR>', { noremap = true, silent = true })
@@ -21,4 +22,16 @@ return {
       vim.api.nvim_set_keymap('n', '<leader>3', ':lua require("harpoon.ui").nav_file(3)<CR>', { noremap = true, silent = true })  -- Navigate to file 3
     end
   },
+    {
+    "pocco81/auto-save.nvim",
+    event = "InsertLeave",
+    config = function()
+      local autosave = require("auto-save")
+      autosave.setup({})
+
+    -- Keybinding to toggle auto-save
+      vim.api.nvim_set_keymap("n", "<leader>ta", ":lua require('auto-save').toggle()<CR>", { noremap = true, silent = true })
+    end,
+  }
+
 }
